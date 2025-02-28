@@ -165,7 +165,7 @@ const HeroSection = () => {
             subtitle: "Providing platforms for growth and development"
         },
         {
-            image: "/con.jpg",
+            image: "/pic4.jpg",
             title: "Fostering Innovation",
             subtitle: "Supporting ideas that change the world"
         }
