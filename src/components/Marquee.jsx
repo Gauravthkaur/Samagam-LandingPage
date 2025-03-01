@@ -44,7 +44,7 @@ const PartnersMarqueeWithLibrary = () => {
                   <img 
                     src={partner.logo} 
                     alt={partner.name} 
-                    className="h-20 w-auto object-contain grayscale-75 group-hover:grayscale-0 transition-all duration-500"
+                    className="h-20 w-auto object-contain  group-hover:grayscale-0 transition-all duration-500"
                   />
                   <div className="absolute -bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="bg-orange-500 text-white text-xs font-medium px-2 py-1 rounded-full">

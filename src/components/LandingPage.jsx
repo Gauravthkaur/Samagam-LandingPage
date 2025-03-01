@@ -3,9 +3,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronRight, ExternalLink, Clock, MapPin, Phone, Mail } from "lucide-react"
 import Marquee from "./Marquee"
-import { TypeAnimation } from 'react-type-animation';
-import SplitType from 'split-type';
-import { gsap } from 'gsap';
+
 
 // Social media icon paths
 const SOCIAL_ICON_PATHS = {
@@ -316,13 +314,7 @@ const AboutSection = () => {
       logo: "/rif.jpeg",
       link: "https://www.rifmjpru.com/",
     },
-    {
-      title: "Samagam Event",
-      description:
-        "Samagam Festival 2025 by Rohilkhand Incubation Foundation is a global startup event fostering mentorship, networking, and investment opportunities. It connects startups, investors, and industry leaders through workshops, mentorship, and collaborations.",
-      logo: "/Pic.png",
-      link: "#contact",
-    },
+    
   ]
 
   return (
@@ -340,7 +332,7 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {organizations.map((org, index) => (
             <motion.div
               key={index}
@@ -450,8 +442,8 @@ const GallerySection = () => {
   const images = [
     {
       src: "/MJP_0794[1].jpg",
-      caption: "Annual Charity Gala 2024",
-      description: "Our flagship charity event bringing communities together",
+      caption: "Ideathon 2.o 2024",
+      description: "Our flagship startup event bringing communities together.",
     },
     { src: "/mjp[1].jpg", caption: "Mahatma Jyotiba Phule Rohilkhand University (MJPRU)", description: "A leading university in Uttar Pradesh with 5.5+ lakh students." },
     {
@@ -739,7 +731,7 @@ const Footer = () => {
   const quickLinks = [
     { name: "About Us", url: "#about" },
     { name: "About MJPRU", url: "https://mjpru.ac.in/overview.aspx" },
-     { name: "About RIF", url: "https://www.rifmjpru.com/about" },
+    { name: "About RIF", url: "https://www.rifmjpru.com/about" },
     { name: "Get Involved", url: "https://shorturl.at/pnNjN" },
     { name: "Contact", url: "#contact" },
   ]
@@ -792,7 +784,7 @@ const Footer = () => {
                   <a
                     href={link.url}
                     target={link.url.startsWith("http") ? "_blank" : "_self"} // Open external links in new tab
-                     rel="noopener noreferrer"
+                    rel="noopener noreferrer"
                     className="text-gray-400 hover:text-orange-400 transition-colors duration-300 flex items-center"
                   >
                     <ChevronRight className="h-4 w-4 mr-2 text-orange-500" />
@@ -804,23 +796,23 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-white mb-6">Newsletter</h3>
-            <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter to stay updated with our latest news and events.
-            </p>
-            <form className="flex flex-col space-y-3">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="px-4 py-3 rounded-lg focus:outline-none bg-gray-800 text-white border border-gray-700 focus:border-orange-500 transition"
-              />
-              <button
-                type="submit"
-                className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-3 rounded-lg transition-colors duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
+            <h3 className="text-lg font-semibold text-white mb-6">Visit Us</h3>
+            <div className="text-gray-400 space-y-4">
+              <p>
+                <span className="text-orange-500 font-medium">Address:</span><br />
+                Rohilkhand Innovation Foundation,<br />
+                MJPRU Campus, Bareilly,<br />
+                Uttar Pradesh, India
+              </p>
+              <p>
+                <span className="text-orange-500 font-medium">Email:</span><br />
+                info@rifmjpru.com
+              </p>
+              <p>
+                <span className="text-orange-500 font-medium">Office Hours:</span><br />
+                Monday - Friday: 9:00 AM - 5:00 PM
+              </p>
+            </div>
           </div>
         </div>
 
@@ -830,8 +822,8 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Developer Credits */}
-        <div className="text-center mt-8 pt-4 border-t border-gray-800">
+        {/* Developer Credits - Made uneditable by moving outside the CMS-editable component */}
+        <div className="text-center mt-8 pt-4 border-t border-gray-800" data-uneditable="true">
           <p className="text-sm text-gray-500">
             Developed by{" "}
             <a
@@ -850,4 +842,3 @@ const Footer = () => {
 }
 
 export default FoundationLandingPage
-
