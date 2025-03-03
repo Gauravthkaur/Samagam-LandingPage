@@ -63,21 +63,42 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
+  // Improved scrollToSection function
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setIsMobileMenuOpen(false)
-    }
+    // Close mobile menu first
+    setIsMobileMenuOpen(false)
+    
+    // Use setTimeout to ensure the menu closing animation completes
+    setTimeout(() => {
+      try {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          // Calculate offset for fixed header
+          const navbarHeight = document.querySelector('nav').offsetHeight || 0
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+          const offsetPosition = elementPosition - navbarHeight
+          
+          // Scroll with offset
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          })
+        } else {
+          console.error(`Element with ID "${sectionId}" not found`)
+        }
+      } catch (error) {
+        console.error("Error scrolling to section:", error)
+      }
+    }, 300) // Increased timeout to ensure menu closes first
   }
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300   ${
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled ? "bg-white shadow-md py-1 border-b border-orange-100" : "bg-transparent py-2"
       } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <div className="container mx-auto px-4  ">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-1 border-b-2 border-gray-200 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white-100 after:shadow-lg after:shadow-white-100 after:animate-pulse">
           {/* Logo */}
           <div className="h-12 flex items-center">
@@ -85,12 +106,12 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8 ">
+          <div className="hidden md:flex space-x-8">
             {["home", "about", "achievements", "gallery", "contact"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className={`text-sm font-medium transition-colors duration-300 hover:text-orange-500 cursor-pointer  ${
+                className={`text-sm font-medium transition-colors duration-300 hover:text-orange-500 cursor-pointer ${
                   isScrolled ? "text-gray-800" : "text-white"
                 }`}
               >
