@@ -389,7 +389,9 @@ const AboutSection = () => {
     <section id="about" className="py-24 min-h-screen bg-gradient-to-b from-white to-orange-50">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div className="text-center mb-16" style={{ y, opacity }} transition={{ duration: 0.8 }}>
-    
+        <span className="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-sm font-medium mb-4">
+            Our Organization
+          </span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
             About <span className="text-orange-600">Us</span>
           </h2>
@@ -454,6 +456,9 @@ const AchievementsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           onViewportEnter={() => setHasAnimated(true)}
         >
+           <span className="inline-block py-1 px-3 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
+            Our Impact
+          </span>
   
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Our <span className="text-orange-100">Achievements</span>
@@ -532,7 +537,9 @@ const GallerySection = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-         
+         <span className="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-sm font-medium mb-4">
+            Our gallery
+          </span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
             Event <span className="text-orange-600">Gallery</span>
           </h2>
@@ -627,6 +634,9 @@ const ContactSection = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
+          <span className="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-sm font-medium mb-4">
+            Join Us
+          </span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
             Register Your <span className="text-orange-600">Startup</span>
           </h2>
