@@ -162,158 +162,205 @@ const Navbar = () => {
   )
 }
 const HeroSection = () => {
-    const [currentSlide, setCurrentSlide] = useState(0)
-    const slides = [
-      {
-        image: "/Samagam-h.png",
-        title: "Empowering Communities",
-        subtitle: "Building a better future through education and collaboration",
-      },
-      {
-        image: "/mjp[1].jpg",
-        title: "Creating Opportunities",
-        subtitle: "Providing platforms for growth and development",
-      },
-      {
-        image: "/pic4.jpg",
-        title: "Fostering Innovation",
-        subtitle: "Supporting ideas that change the world",
-      },
-    ]
-  
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length)
-      }, 5000)
-      return () => clearInterval(interval)
-    }, [])
-  
-    return (
-      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-        {/* Background Image Slider with Ken Burns effect */}
-        {slides.map((slide, index) => (
-          <motion.div
-            key={index}
-            className="absolute inset-0 z-0"
-            initial={{ opacity: 0, scale: 1.2 }}
-            animate={{
-              opacity: currentSlide === index ? 1 : 0,
-              scale: currentSlide === index ? 1 : 1.2,
-            }}
-            transition={{ duration: 2, ease: "easeOut" }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10" />
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const slides = [
+    {
+      image: "/Samagam-h.png",
+      mobileImage: "/Samagam-h-mobile.png",
+      title: "Empowering Communities",
+      subtitle: "Building a better future through education and collaboration",
+    },
+    {
+      image: "/mjp[1].jpg",
+      title: "Creating Opportunities",
+      subtitle: "Providing platforms for growth and development",
+    },
+    {
+      image: "/pic4.jpg",
+      title: "Fostering Innovation",
+      subtitle: "Supporting ideas that change the world",
+    },
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+      {/* Background Image Slider with Ken Burns effect - Orientation responsive */}
+      {slides.map((slide, index) => (
+        <motion.div
+          key={index}
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0, scale: 1.2 }}
+          animate={{
+            opacity: currentSlide === index ? 1 : 0,
+            scale: currentSlide === index ? 1 : 1.2,
+          }}
+          transition={{ duration: 2, ease: "easeOut" }}
+        >
+          {/* Darkened overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80 z-10" />
+
+          {/* Desktop image (hidden on mobile) */}
+          <div className="absolute inset-0 w-full h-full hidden sm:block">
             <img
               src={slide.image || "/placeholder.svg"}
               alt={`Foundation Background ${index + 1}`}
-              className="absolute object-cover w-full h-full"
+              className="absolute w-full h-full object-cover"
+              style={{ objectPosition: "center center" }}
             />
-          </motion.div>
-        ))}
-  
-        {/* Hero Content */}
-        <div className="relative z-20 px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
-          >
-            <span className="inline-block py-1 px-3 rounded-full bg-orange-500/20 text-orange-300 text-sm font-medium mb-4">
-              Empowering Future Innovators
-            </span>
-            <h1 className="text-3xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6 font-[Montserrat] tracking-tight">
-              {slides[currentSlide].title}{" "}
-              <motion.span
-                className="bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text"
-                animate={{
-                  backgroundPosition: ["0%", "100%"],
-                  opacity: [0.8, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "reverse",
-                }}
-              >
-                Together
-              </motion.span>
-            </h1>
-            <motion.p
-              className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              {slides[currentSlide].subtitle}
-            </motion.p>
-          </motion.div>
-  
-          <motion.div
-            className="flex flex-col sm:flex-row gap-6 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById("about").scrollIntoView({ behavior: "smooth" })}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-10 py-4 rounded-full font-semibold text-lg tracking-wider transition-all duration-300 shadow-lg hover:shadow-orange-500/40"
-            >
-              Learn More
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}
-              className="bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white px-10 py-4 rounded-full font-semibold text-lg tracking-wider transition-all duration-300"
-            >
-              Get Involved
-            </motion.button>
-          </motion.div>
-        </div>
-  
-        {/* Slide Indicators */}
-        <motion.div
-          className="absolute bottom-10 left-0 right-0 z-20 flex justify-center space-x-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          {slides.map((_, index) => (
-            <motion.button
-              key={index}
-              whileHover={{ scale: 1.2 }}
-              className={`h-3 rounded-full transition-all duration-500 ${
-                currentSlide === index ? "bg-gradient-to-r from-orange-400 to-orange-600 w-8" : "bg-white/50 w-3"
-              }`}
-              onClick={() => setCurrentSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
+          </div>
+
+          {/* Mobile image (hidden on desktop) */}
+          <div className="absolute inset-0 w-full h-full sm:hidden block">
+            <img
+              src={slide.mobileImage || slide.image} // Fallback to desktop image if mobile version not available
+              alt={`Foundation Background Mobile ${index + 1}`}
+              className="absolute w-full h-full object-cover"
+              style={{ objectPosition: "center center" }}
             />
-          ))}
-        </motion.div>
-  
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-20 left-1/2 transform -translate-x-1/2"
-          animate={{
-            y: [0, 10, 0],
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-white/50 flex justify-center">
-            <div className="w-1 h-2 bg-white rounded-full mt-2" />
           </div>
         </motion.div>
-      </section>
-    )
-  }
+      ))}
+
+      {/* Hero Content with Animated Text */}
+      <div className="relative z-20 px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-8"
+        >
+        
+
+          {/* Animated Title Container - Fixed the height issue */}
+          <div className="relative mb-6">
+            {slides.map((slide, index) => (
+              <motion.h1
+                key={index}
+                className={`text-2xl md:text-5xl lg:text-7xl font-black text-white leading-tight font-[Montserrat] tracking-tight ${
+                  currentSlide === index ? "relative" : "absolute opacity-0 pointer-events-none"
+                }`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{
+                  opacity: currentSlide === index ? 1 : 0,
+                  y: currentSlide === index ? 0 : 50,
+                }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                {slide.title}{" "}
+                <motion.span
+                  className="bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text"
+                  animate={{
+                    backgroundPosition: ["0%", "100%"],
+                    opacity: [0.8, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    repeatType: "reverse",
+                  }}
+                >
+                  Together
+                </motion.span>
+              </motion.h1>
+            ))}
+          </div>
+
+          {/* Animated Subtitle Container - Fixed the height issue */}
+          <div className="relative mb-8 md:mb-12 min-h-[3rem] md:min-h-[4rem]">
+            {slides.map((slide, index) => (
+              <motion.p
+                key={index}
+                className={`text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto font-light leading-relaxed ${
+                  currentSlide === index ? "relative" : "absolute opacity-0 pointer-events-none"
+                }`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{
+                  opacity: currentSlide === index ? 1 : 0,
+                  y: currentSlide === index ? 0 : 30,
+                }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              >
+                {slide.subtitle}
+              </motion.p>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Buttons */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+            className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-lg tracking-wider transition-all duration-300 shadow-lg hover:shadow-orange-500/40"
+          >
+            Learn More
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            className="bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-lg tracking-wider transition-all duration-300"
+          >
+            Get Involved
+          </motion.button>
+        </motion.div>
+      </div>
+
+      {/* Slide Indicators */}
+      <motion.div
+        className="absolute bottom-16 sm:bottom-10 left-0 right-0 z-20 flex justify-center space-x-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+      >
+        {slides.map((_, index) => (
+          <motion.button
+            key={index}
+            whileHover={{ scale: 1.2 }}
+            className={`h-2 sm:h-3 rounded-full transition-all duration-500 ${
+              currentSlide === index
+                ? "bg-gradient-to-r from-orange-400 to-orange-600 w-6 sm:w-8"
+                : "bg-white/50 w-2 sm:w-3"
+            }`}
+            onClick={() => setCurrentSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-6 sm:bottom-20 left-1/2 transform -translate-x-1/2"
+        animate={{
+          y: [0, 10, 0],
+          opacity: [0.5, 1, 0.5],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+      >
+        <div className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border-2 border-white/50 flex justify-center">
+          <div className="w-1 h-2 bg-white rounded-full mt-2" />
+        </div>
+      </motion.div>
+    </section>
+  )
+}
 // About Section Component
 const AboutSection = () => {
   const { scrollYProgress } = useScroll()
@@ -342,9 +389,7 @@ const AboutSection = () => {
     <section id="about" className="py-24 min-h-screen bg-gradient-to-b from-white to-orange-50">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div className="text-center mb-16" style={{ y, opacity }} transition={{ duration: 0.8 }}>
-        <span className="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-sm font-medium mb-4">
-            Our Organization
-          </span>
+    
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
             About <span className="text-orange-600">Us</span>
           </h2>
@@ -409,9 +454,7 @@ const AchievementsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           onViewportEnter={() => setHasAnimated(true)}
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-white/20 text-white text-sm font-medium mb-4">
-            Our Impact
-          </span>
+  
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Our <span className="text-orange-100">Achievements</span>
           </h2>
@@ -489,9 +532,7 @@ const GallerySection = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-sm font-medium mb-4">
-            Our Gallery
-          </span>
+         
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
             Event <span className="text-orange-600">Gallery</span>
           </h2>
@@ -586,9 +627,6 @@ const ContactSection = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-sm font-medium mb-4">
-            Join Us
-          </span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
             Register Your <span className="text-orange-600">Startup</span>
           </h2>
